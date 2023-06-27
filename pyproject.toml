@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "hexlet-code"
+version = "0.1.0"
+description = ""
+authors = ["zcmn <zhecaman@icloud.com>"]
+packages = [
+    {include = 'gendiff'},
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+argparse = "^1.4.0"
+
+[tool.poetry.dev-dependencies]
+
+
+[tool.poetry.scripts]
+gendiff = 'gendiff.scripts.gendiff_entry: main'
+
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
