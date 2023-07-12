@@ -44,7 +44,7 @@ def generate_diff(filepath1, filepath2):
             if key2 not in f1.keys():
                 formatted = f"+ {key2}: {f2[key2]}"
                 result.append(formatted)
-        return sorted(result, key=lambda x: x[2:])
+        return sorted(result, key=lambda x: x[2])
 
     with open(filepath1) as f1, open(filepath2) as f2:
         data1 = json.load(f1)
