@@ -19,6 +19,7 @@ def generate_diff(filepath1, filepath2):
         files key-value  difference
         """
         result = []
+        
 
         for key1 in f1.keys():
             if isinstance(f1[key1], bool):

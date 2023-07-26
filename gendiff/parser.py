@@ -10,7 +10,7 @@ def get_reader(filepath):
     '.yaml' : yaml.safe_load
     }.get(Path(filepath).suffix)
 
-def parser(path):
+def parse(path):
     reader = get_reader(path)
     with open(path) as file:
         return reader(file)
