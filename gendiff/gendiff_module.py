@@ -1,14 +1,6 @@
-from .parser import parse
 
-
-def generate_diff(f1, f2):
-    """Generate difference between two files
-
-    Args:
-        filepath1 (str): path to file 1
-        filepath2 (str): path to file 2
-    """
-
+def make_diff(f1, f2):
+    
     keys = sorted(f1.keys() | f2.keys())
     result = dict()
     
@@ -38,7 +30,7 @@ def generate_diff(f1, f2):
             result[key] = {
                     'type' : 'dict',
                     'value' : None,
-                    'children' : generate_diff(f1[key], f2[key]),
+                    'children' : make_diff(f1[key], f2[key]),
                 }
         else: 
             result[key] = {

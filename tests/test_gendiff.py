@@ -1,4 +1,4 @@
-from gendiff import generate_diff
+from gendiff.scripts.gendiff_entry import generate_diff
 from tests.fixtures.right import RIGHT_PLAIN, RIGHT_NESTED
 
 
