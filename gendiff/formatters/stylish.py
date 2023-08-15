@@ -1,54 +1,66 @@
 import json
 
 
-SYMBOLS = {
-    'deleted' : '  - ',
-    'added' : '  + ',
-    'unchanged' : '    '
-}
-
-def stringify(data, level=1):
-    result = '{\n'
-    indent = '    '
-
-    if isinstance(data, str):
-        return data
-    if isinstance(data, bool):
-        return 'true' if data else 'false'
-    if isinstance(data, dict):
-        for key, value in data.items():
-            result += f'{indent*level}{key}: '
-            result += f'{stringify(value, level+1)}\n'
-        result += f'{indent*(level-1)}}}'
-        return result
-    else:
-        return json.dumps(data)
+SYMBOLS = {"deleted": "  - ", "added": "  + ", "unchanged": "    "}
+INDENT = "    "
 
 
-def make_stylish_view(dictionary, level=1):
-    result = '{\n'
-    level += 1
+def stringify_value(value):
+    if isinstance(value, bool) or value is None:
+        return json.dumps(value)
+    return value
+
+
+def stringify(data, level):
+    if not isinstance(data, dict):
+        return stringify_value(data)
+    result = ["{"]
+    indent = INDENT * level
+
+    for key, value in data.items():
+        if isinstance(value, dict):
+            string = f"{indent}{INDENT}{key}: " f"{stringify(value, level+1)}"
+            result.append(string)
+        else:
+            string = f"{indent}{INDENT}{key}: {stringify(value, level)}"
+            result.append(string)
+    result.append(f"{indent}}}")
+    return "\n".join(result)
+
+
+def format_diff(dictionary, level=0):
+    diffs = []
+    indent = INDENT * level
 
     for key, value in dictionary.items():
-        indent = '....' * (level-1)
-        type = value.get('type')
-        values = value.get('value')
-        children = value.get('children')
+        type = value.get("type")
+        values = value.get("value")
+        if type == "dict":
+            beg_string = (
+                f"{indent}{INDENT}{key}: " f"{{\n{format_diff(values, level+1)}"
+            )
+            end_string = f"{indent}{INDENT}}}"
+            diffs.extend([beg_string, end_string])
+        elif type == "changed":
+            beg_string = (
+                f'{indent}{SYMBOLS["deleted"]}{key}: '
+                f'{stringify(values.get("old"), level+1)}'
+            )
+            end_string = (
+                f'{indent}{SYMBOLS["added"]}{key}: '
+                f'{stringify(values.get("new"), level+1)}'
+            )
+            diffs.extend([beg_string, end_string])
+        else:
+            beg_string = (
+                f"{indent}{SYMBOLS[type]}{key}: "
+                f"{stringify(values, level+1)}"
+            )
+            diffs.append(beg_string)
 
-        if type in ('added', 'deleted', 'unchanged'):
-            result += f'{indent}{SYMBOLS[type]}{key}: '
-            result += f'{stringify(values, level+1)}\n'
-        elif type == 'changed':
-            result += f'{indent}{SYMBOLS["deleted"]}{key}: '
-            result += f'{stringify(values.get("old"), level+1)}\n'
-            result += f'{indent}{SYMBOLS["added"]}{key}: '
-            result += f'{stringify(values.get("new"), level+1)}\n'
-        elif type == 'dict':
-            result += f'{indent*2}{key}: '
-            result += f'{make_stylish_view(children, level)}\n'
-    return result
+    return "\n".join(diffs)
 
 
-
-
-
+def make_stylish(diff, level=0):
+    result = ["{", format_diff(diff, level), "}"]
+    return "\n".join(result)

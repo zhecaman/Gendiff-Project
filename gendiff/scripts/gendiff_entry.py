@@ -1,17 +1,19 @@
-from ..parser import parse_args, parse_file
-from ..gendiff_module import make_diff
-from ..formatters.stylish import make_stylish_view
+from gendiff.parser import parse_args, parse_file
+from gendiff.gendiff_module import make_diff
+from gendiff.formatters.formatter import format
 
-def generate_diff(path1, path2):
+
+def generate_diff(path1, path2, formatter="stylish"):
     f1 = parse_file(path1)
     f2 = parse_file(path2)
-    formatted_data = make_diff(f1, f2)
-    return make_stylish_view(formatted_data)
+    diff = make_diff(f1, f2)
+    return format(diff, formatter)
+
 
 def main():
     args = parse_args()
-    print(generate_diff(args.first_file, args.second_file))
+    print(generate_diff(args.first_file, args.second_file, args.format))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
