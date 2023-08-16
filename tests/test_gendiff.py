@@ -1,5 +1,4 @@
-import json
-from gendiff.scripts.gendiff_entry import generate_diff
+from gendiff.gendiff import generate_diff
 from tests.fixtures.right import RIGHT_PLAIN, RIGHT_NESTED, RIGHT_SIMPLE
 
 JSON = "tests/fixtures/RIGHT_JSON.json"
