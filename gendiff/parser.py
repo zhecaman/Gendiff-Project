@@ -30,6 +30,7 @@ def parse_args():
         choices=[
             "stylish",
             "plain",
+            "json",
         ],
         help="set format of output",
         default="stylish",
