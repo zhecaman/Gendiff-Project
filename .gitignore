@@ -1,4 +1,4 @@
 .vscode
 .pytest_cache
 dist
-__pycache__/
+**/__pycache__/
