@@ -17,9 +17,11 @@ ANSWER_JSON_NESTED = "tests/fixtures/answer_nested_json"
 ANSWER_PLAIN_NESTED = "tests/fixtures/answer_nested_plain"
 ANSWER_STYLISH_NESTED = "tests/fixtures/answer_nested_stylish"
 
+
 def read_answer(filepath):
     with open(filepath) as file:
         return file.read()
+
 
 @pytest.mark.parametrize(
     ("filepath1, filepath2, formatter, expected"),
