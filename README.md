@@ -8,7 +8,8 @@
 # Gendiff - difference calculator
 ### Takes two files and shows difference between them
 #### Installation:
-    Simply run make install in root folder after clonning repo 
+    1 Make sure you have poetry installed
+    2 Simply run make install in root folder after clonning repo 
 #### Usage:
 `gendiff -f [plain stylish json] filepath1 filepath 2`
 
