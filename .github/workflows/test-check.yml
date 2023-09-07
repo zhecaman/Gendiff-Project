@@ -13,13 +13,11 @@ jobs:
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
-          pip install pytest-cov
-          pip install flake8
-          pip install poetry
-          pip install PyYAML
+          pip install poetry flake8 pytest PyYaml
+          make install
       - name: Test with pytest
         run: |
-          make test-coverage
+          make test
       - name: Test Coverage
         uses: paambaati/codeclimate-action@v5.0.0
         if: github.ref_name == 'main'
