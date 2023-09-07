@@ -1,15 +1,16 @@
 import pytest
-import os 
+import os
 from gendiff.gendiff import generate_diff
 
 
 NESTED1_JSON = "nested1.json"
 NESTED2_JSON = "nested2.json"
 NESTED1_YAML = "nested1.yaml"
-NESTED2_YAML =  "nested2.yaml"
+NESTED2_YAML = "nested2.yaml"
 ANSWER_JSON_NESTED = "answer_nested_json"
 ANSWER_PLAIN_NESTED = "answer_nested_plain"
 ANSWER_STYLISH_NESTED = "answer_nested_stylish"
+
 
 def get_path_to_fixture(filename):
     return os.path.join('tests/fixtures', filename)
