@@ -1,7 +1,6 @@
 import json
 import yaml
 from pathlib import Path
-import argparse
 
 
 def get_reader(filepath):
