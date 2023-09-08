@@ -16,7 +16,6 @@ jobs:
           pip install poetry
       - name: Install app
         run: |
-          make build
           make install
       - name: Test with pytest
         run: |
