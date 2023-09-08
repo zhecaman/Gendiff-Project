@@ -13,6 +13,7 @@ jobs:
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
+          pip install poetry
       - name: Install app
         run: |
           make build
