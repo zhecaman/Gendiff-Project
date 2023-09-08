@@ -13,7 +13,6 @@ jobs:
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
-          pip install poetry flake8 pytest PyYaml
       - name: Install app
         run: |
           make build
