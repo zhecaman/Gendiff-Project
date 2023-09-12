@@ -22,7 +22,6 @@ jobs:
           make test
       - name: Test Coverage
         uses: paambaati/codeclimate-action@v5.0.0
-        if: github.ref_name == 'main'
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_REPORTER_ID }}
         with:
