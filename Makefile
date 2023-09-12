@@ -10,7 +10,7 @@ test:
 	poetry run pytest
 
 test-coverage:
-	poetry run pytest --cov=gendiff --cov-report json
+	poetry run pytest --cov=gendiff --cov-report lcov
 	
 package-install:
 	python3 -m pip install --user dist/*.whl
