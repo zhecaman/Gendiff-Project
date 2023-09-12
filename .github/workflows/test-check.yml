@@ -23,7 +23,7 @@ jobs:
       - name: Check & publish code coverage
         uses: paambaati/codeclimate-action@v3.2.0
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_REPORTER_ID }}
         with:
           coverageCommand: poetry run pytest --cov --debug --cov-report lcov
           coverageLocations: ${{github.workspace}}/*.lcov:lcov
